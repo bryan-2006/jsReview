@@ -326,6 +326,10 @@ cloneOfClone.value = 3;
 let nameTemplate = `${LEGAL_FIRST_NAME} -2006`
 //console.log(nameTemplate); Bryan -2006
 
+
+/**
+ * Date Objects
+ */
 let now = new Date(); //time rn
 let Jan01_1970 = new Date(0); // Sets time to 0 ms since Jan 1, 1970
 let Jan01_2024 = new Date(2024, 0, 1);
@@ -335,3 +339,85 @@ let currentMonth = now.getMonth;
 let today = now.getDate;
 let timeZoneDiff = now.getTimezoneOffset; // Diff b/w UTC and your timezoone
 //more methods can be found online
+
+
+/**
+ * More Array Stuff
+ */
+
+// Adding Elements
+const numbersArray = [1,2,3,4,5,6];
+numbersArray.push(7, 8);//1,2,...,6,7,8
+numbersArray.unshift(0);//0,1,2...
+numbersArray.splice(4,0,3.4,3.5);//...3,3.4,3.5,4,...
+//4 = starting index of 3.4 after it is spliced in
+//0 is number of elements to delete
+
+
+// Finding Primitive Values
+const containsArray = [1,2,3,5,1]
+const indexOfOne = containsArray.indexOf(1); //0; if 1 did not exits it would be -1
+const lastIndexOfOne = containsArray.lastIndexOf(1) //4
+const isOneInArray = containsArray.includes(1); //true
+
+// Finding Reference Values
+const employees = [
+    {id: 1, name: "Mihcael"}, {id: 2, name: "Jim"}, {id: 2, name: "Pam"}
+];
+
+// employee = {id: 1, name: "Jim"} by using anonymous function
+let employee = employees.find(function(x){ //we can also use findIndex to get index of obj
+    return x.name == "Jim";
+});
+
+// arrow function (cleaner looking but does same as above)
+employee = employees.find((x) => { return x.name == "Pam";
+})                                                                                       
+
+// Removing Elements
+// current array: [0, 1, 2, 3, 3.4, 3.5, 4, 5, 6, 7, 8]
+numbersArray.pop(); // ...6, 7
+numbersArray.shift(); //1,2,...
+numbersArray.splice(3,2)//remove 2 elements starting after index of 3 (3.4 & 3.5) 
+// 0, 1, 2, 3, 4, 5, 6, 7, 8
+
+// Combining Arrays
+let numbersArray2 = [9,10];
+numbersArray2 = numbersArray2.concat(numbersArray); //9,10,0,1,2,...
+
+// Slice Arrays
+numbersArray2 = numbersArray2.slice(0,2); //[9,10]
+
+// Spread Operator
+const combined = [...numbersArray, 8.5, ...numbersArray2]; //1,2,3...,8.5,9,10
+
+// Make Copy of Array
+let a = [1]; let b = [...a]; //this makes a copy instead of reference when b=a
+
+// You can iterate over an array with a for-of loop; you can also use forEach method
+combined.forEach ((number, index)=>{ //console.log(number + index) //same as for of
+});
+
+// Array to string
+let letters = ["B", "r", "y"]; let word = letters.join(""); // word = Bry
+// String to Array
+letters = word.split(""); // letters = ["B","r","y"]
+// Other String Methods
+word = word.toLowerCase(); //bry
+
+
+/**
+ * Sorting Array
+ */
+let charArray = ['b', 'c', 'a']; charArray.sort(); // now its ['a', 'b', 'c'];
+charArray.reverse(); // cba
+
+// sort method for objects
+
+employees.sort((a,b)=> {
+    const lowerCaseA = a.name.toLowerCase(); const lowerCaseB = b.name.toLowerCase();
+    if(lowerCaseA < lowerCaseB) return -1;
+    if(lowerCaseB < lowerCaseA) return 1;
+    return 0;
+}) //employees = jim, michael, pam   now since its sorted by alphabetical order
+
