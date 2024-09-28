@@ -86,6 +86,7 @@ anArray.splice(1,1); //used to remove elements from array (second argument !need
 
 /**
  * Functions
+ * JS does hoisting (moves all functions to top of scope; use functions before initially defined)
  */
 function printHelloWorld(word){
     console.log("Hello " + word + "!");
@@ -421,3 +422,92 @@ employees.sort((a,b)=> {
     return 0;
 }) //employees = jim, michael, pam   now since its sorted by alphabetical order
 
+
+/**
+ * Testing Elements in Arra
+ */
+const testNum = [2,4,5,10];
+const areAllEven = testNum.every(number => {
+    return number % 2 == 0;
+}) //for testNum would return false
+const someEven = testNum.some(number => {
+    return number % 2 == 0;
+}) //for testNum would return true
+
+
+/**
+ * Filtering Array
+ */
+const evenNumbers = testNum.filter(number => number % 2 == 0); //2,4,10
+
+//for Objects
+const workers = [
+    {id: 1, role: "Dev"},
+    {id: 2, role: "Tester"},
+    {id: 3, role: "Dev"},
+]
+
+const devWorkers = workers.filter(worker => worker.role == "Dev");
+//[ { id: 1, role: 'Dev' }, { id: 3, role: 'Dev' } ]
+
+
+/**
+ * Mapping an Array
+ */
+const testSquared = testNum.map(num => num*num); //squared as per the mapping process
+
+const employeesWithEmails = [
+    {id: 1, name: "Bry", email: "sAS30@gmail.com"},
+    {id: 2, name: "Ry", email: "b21Abs@gmail.com"},
+    {id: 3, name: "Bri", email: "ask1@gmail.com"},
+]
+const updatedEmployees = employeesWithEmails.map(employee =>({
+    //spread assures original isnt tampered with
+    ...employee, //spread op to copy over all properties into this new obj we are returning
+    email: employee.email.toLowerCase()
+}));
+
+
+/**
+ * Arguments
+ */
+function multiply(...args){ //for when function has indefinite amount of args
+    return args.reduce((accumulator, currentValue) => accumulator*currentValue, 1); //1 is starting currentValue
+    //Reduces array to a single value by accumulting and that being current value for next it
+}
+//console.log(multiply(1,2,3,4)); 24
+//speaking of arguments: we could define function multiply (x=2, y=2) in which case default args are 2
+
+
+/**
+ * Getters and Setters
+ */
+const course = {
+    name: "JS review",
+    duration: "taking longer than I thought",
+    get details(){
+        return `${this.name} is ${this.duration}`
+    },
+    set details(value){
+        if(typeof value != 'string'){
+            throw new Error("value in details(value) has to be a string")
+        }
+        let parts = value.split(" is ");
+        this.name = parts[0]; this.duration = parts[1];
+    }
+}
+
+try{
+    course.details = "JS is taking too long";
+}catch(e){
+    console.log(`Caught an error: ${e.message}`);
+} 
+// console.log(course.details); JS is taking too long       but if not string then 
+// Caught an error: value in details(value) has to be a string
+
+//instead of let keyword we can use var btw; var is function scoped
+
+
+/**
+ * All Done!!!
+ */
